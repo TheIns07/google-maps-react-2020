@@ -42,7 +42,8 @@ h1 {
 .locate {
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  left: 90em;
+  
   background: none;
   border: none;
   z-index: 10;
@@ -50,4 +51,8 @@ h1 {
 .locate img {
   width: 30px;
   cursor: pointer;
+}
+
+.googleMap{
+  border: 8px darkkhaki double;
 }

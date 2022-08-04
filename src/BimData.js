@@ -23,8 +23,8 @@ import mapStyles from "./mapStyles";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "100vh",
-  width: "100vw",
+  height: "90vh",
+  width: "90vw",
 };
 const options = {
   styles: mapStyles,
@@ -32,13 +32,13 @@ const options = {
   zoomControl: true,
 };
 const center = {
-  lat: 43.6532,
-  lng: -79.3832,
+  lat: 27.496031,
+  lng: -109.932838
 };
 
 export default function App() {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "",
     libraries,
   });
   const [markers, setMarkers] = React.useState([]);
@@ -62,7 +62,7 @@ export default function App() {
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(9);
   }, []);
 
   if (loadError) return "Error";
@@ -70,20 +70,14 @@ export default function App() {
 
   return (
     <div>
-      <h1>
-        Bears{" "}
-        <span role="img" aria-label="tent">
-          ⛺️
-        </span>
-      </h1>
 
       <Locate panTo={panTo} />
       <Search panTo={panTo} />
-
+      <div className = "googleMap">
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
-        zoom={8}
+        zoom={13}
         center={center}
         options={options}
         onClick={onMapClick}
@@ -97,7 +91,7 @@ export default function App() {
               setSelected(marker);
             }}
             icon={{
-              url: `/bear.svg`,
+              url: `/dog.svg`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 30),
@@ -115,15 +109,18 @@ export default function App() {
             <div>
               <h2>
                 <span role="img" aria-label="bear">
-                  🐻
+                  🐩
                 </span>{" "}
-                Alert
+                Animal Encontrado
               </h2>
               <p>Spotted {formatRelative(selected.time, new Date())}</p>
             </div>
           </InfoWindow>
         ) : null}
       </GoogleMap>
+
+      </div>
+      
     </div>
   );
 }
